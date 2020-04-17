@@ -5,8 +5,8 @@ This repository contains terraform module ready to use for everyone that would l
 ## Usage
 
 ```ruby
-module "aws_cost_monitoring" {
-  source                = "github.com/radekl/aws-cost-monitoring"
+module "aws_budget" {
+  source                = "github.com/radekl/aws-cost-monitoring//aws-budget"
   monthly_budget        = 1000 #USD
   subscriber_email_list = ["my-email@example.org"]
 }

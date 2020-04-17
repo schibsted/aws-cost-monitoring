@@ -1,10 +1,10 @@
 resource "aws_budgets_budget" "monthly" {
-  name         = "Monthly AWS Budget"
+  name         = var.monthly_budget_name
   budget_type  = "COST"
   limit_amount = var.monthly_budget
   limit_unit   = "USD"
 
-  # If you didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC.
+  # "If you didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC."
   time_period_end = "2087-06-15_00:00"
 
   # Start is required
