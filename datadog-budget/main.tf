@@ -13,7 +13,7 @@ resource "datadog_monitor" "aws_service_anomaly" {
       Recovered
       {{/is_recovery}}
 
-      Notify: @radoslaw.lisowski@schibsted.pl
+      Notify: ${join(", ", var.subscriber_email_list)}
     EOT
 
   name                = "Abnormal spendings on AWS service {{servicename.name}} on account {{account_id.name}}"

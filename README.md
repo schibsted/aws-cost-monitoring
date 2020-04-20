@@ -4,9 +4,21 @@ This repository contains terraform module ready to use for everyone that would l
 
 ## Usage
 
+### AWS Budget
+
 ```ruby
 module "aws_budget" {
-  source                = "github.com/radekl/aws-cost-monitoring//aws-budget"
+  source                = "github.com/schibsted/aws-cost-monitoring//aws-budget"
+  monthly_budget        = 1000 #USD
+  subscriber_email_list = ["my-email@example.org"]
+}
+```
+
+### Datadog dashboard and monitors
+
+```ruby
+module "aws_budget" {
+  source                = "github.com/schibsted/aws-cost-monitoring//datadog-budget"
   monthly_budget        = 1000 #USD
   subscriber_email_list = ["my-email@example.org"]
 }
