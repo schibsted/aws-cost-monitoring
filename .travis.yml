@@ -38,7 +38,7 @@ jobs:
       install: ignore
       script: ignore
       env:
-        - secure: "SxMkR8qDsBaLl+QRx2EI/V6nPHrjYukk+JrLlwWG8kBmFmqYk8fPmivy5+BDO0EG4yGMMfRm2P8cSipuXw/IsHmgzJGs2wmQvZ9g8Ad8NWj5vKEcD5/GcM7QFQ+kPw9UVPsyMwvBlX3T/6P/gcb0myaCA6ED8LhNGO7ZSje5LyyExdCAgq8W3N9kk41pwP23MZKomUWaA9wLm5JbAoTzfXo7jjC+Of6oEfO+wo0zBR0Nf37uTCB98saD/r83YWJS5vHIc+FBfDVTewUZHudNMZ/zRHMRN52n/6IesKKgAvFgb99Y+cyXAFImNFjHOsZcv2y4bz3cl0JhyHbclku4zuvM0LgHO96W5bknpwLKCPKksvp5wr86KDGj92MPtCj3nHxC0qiYRKA0mblTMCgUrY3Ba60/ziOert5QMVAjphV7bMVNJxs/Gz0IAlz/tKUbEyXzx9Ye/QLlZXKOlyN/ZfpzrXPL0qkBsdhOsvVOuSSzv81fhWQGRcwi4GKeIYRmi6ym1Qo9FgsrFV58k6G1hT3zc4kG/6lId9jnC1i82+s3/oKLD/JrV+wNxWpmabReYShBPL0inrXnyPwUbB9k49Umwaj0fAQUiKOZWXQfhdrpomLD+q7SRQTqwF6xJIwPcBQPphLwkg6dXXSfX+8CLDSpq5yrExcg/nEum623f/c="
+        - secure: "PrCnSPV5QDJxeojUuFwueqMikU3v1HWUQhGWuxnKkt1kYvySNTbyUZcihRcX9CuWed1Q9hPc3SpfPGGmWwuPPsdPWIEY0GxniyNEc7IVeIGZT4PwlY8+q6+swRW36S1vvyXYi1YCIEwulahEnYTJcEPRYoCaSdGR54qA4zmyx8cfGFwsAcujKt8sfTIrLjt6rBD0NQm8/LmgwhPKhmEwzb/vJ8pIHAf3ew4wzyT/wEuQdwI+BFPMgVPvOhAcKc5NNjfRt2p0C29zsVdUDhZf2+a10Ta6P5xUUSRVdYNHXY8w9Y9xEu2PNDxclbpMgF6qNj/F3C5RMjXJTOnIeB91UdWKHR9kAIQsrW653FZfvndwotOTVQJhQ7tPijkI9Mn0Xwe944Mtnb8mA/OWNNWT3Aa16sNA+u6/VFNr9S4Cuwe/S/0Bin8VM4hm3yrs+cNTMJMz3yszUc7CEVViFTr612H5jBSg7bTvibeEV7a/VC6DEhAmvgJ5W51fdfGmRPHGaKGjOltE1XPNYmdx8yNdTum0BCvJ8JsCmxapiwBAr5XudVZZouVhNmslpqM8W9Q71ZBwOX4uQPHGvpUKO6BKLKYRxsdzviz0b0UAMVFNELesFwCD+9ZJKqSvG7VT22txlw/eFW7gg5VkCsaMA21ni/FgcGTIQEWDlbTxgidUE6g="
       deploy:
         - provider: script
           script: npx semantic-release
