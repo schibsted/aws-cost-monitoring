@@ -18,7 +18,7 @@ resource "datadog_monitor" "aws_service_anomaly" {
 
   name                = "Abnormal spendings on AWS service {{servicename.name}} on account {{account_id.name}}"
   new_host_delay      = 300
-  no_data_timeframe   = 1440
+  no_data_timeframe   = 172800
   notify_audit        = false
   notify_no_data      = true
   query               = "avg(last_2w):anomalies(per_hour(max:aws.billing.estimated_charges{*} by {servicename,account_id}.rollup(max, 86400)), 'agile', 3, direction='both', alert_window='last_1d', interval=7200, count_default_zero='true', seasonality='weekly') >= 1"
