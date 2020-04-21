@@ -3,7 +3,7 @@ node_js:
   - 12
 
 env:
-  - TF_VERSION=0.12.24 TF_OS=linux_amd64 TF_SHA256=invalid
+  - TF_VERSION=0.12.24 TF_OS=linux_amd64 TF_SHA256=602d2529aafdaa0f605c06adb7c72cfb585d8aa19b3f4d8d189b42589e27bf11
 
 install:
   - curl --silent --output terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_${TF_OS}.zip
