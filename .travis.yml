@@ -22,7 +22,7 @@ _shared_job: &SHARED_JOB
 
 jobs:
   include:
-    - name: Validate
+    - stage: Validate
       env:
         - TF_VERSION=0.12.24
         - TF_OS=linux_amd64
@@ -33,7 +33,7 @@ jobs:
         - TF_OS=linux_amd64
         - TF_SHA256=78fd53c0fffd657ee0ab5decac604b0dea2e6c0d4199a9f27db53f081d831a45
       <<: *SHARED_JOB
-    - name: Release
+    - stage: Release
       if: branch = master and type = push
       deploy:
         - provider: script
