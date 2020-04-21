@@ -3,7 +3,8 @@ node_js:
   - 12
 
 env:
-  - TF_VERSION=0.12.24 TF_OS=linux_amd64 TF_SHA256=602d2529aafdaa0f605c06adb7c72cfb585d8aa19b3f4d8d189b42589e27bf11
+  global:
+    - secure: "SxMkR8qDsBaLl+QRx2EI/V6nPHrjYukk+JrLlwWG8kBmFmqYk8fPmivy5+BDO0EG4yGMMfRm2P8cSipuXw/IsHmgzJGs2wmQvZ9g8Ad8NWj5vKEcD5/GcM7QFQ+kPw9UVPsyMwvBlX3T/6P/gcb0myaCA6ED8LhNGO7ZSje5LyyExdCAgq8W3N9kk41pwP23MZKomUWaA9wLm5JbAoTzfXo7jjC+Of6oEfO+wo0zBR0Nf37uTCB98saD/r83YWJS5vHIc+FBfDVTewUZHudNMZ/zRHMRN52n/6IesKKgAvFgb99Y+cyXAFImNFjHOsZcv2y4bz3cl0JhyHbclku4zuvM0LgHO96W5bknpwLKCPKksvp5wr86KDGj92MPtCj3nHxC0qiYRKA0mblTMCgUrY3Ba60/ziOert5QMVAjphV7bMVNJxs/Gz0IAlz/tKUbEyXzx9Ye/QLlZXKOlyN/ZfpzrXPL0qkBsdhOsvVOuSSzv81fhWQGRcwi4GKeIYRmi6ym1Qo9FgsrFV58k6G1hT3zc4kG/6lId9jnC1i82+s3/oKLD/JrV+wNxWpmabReYShBPL0inrXnyPwUbB9k49Umwaj0fAQUiKOZWXQfhdrpomLD+q7SRQTqwF6xJIwPcBQPphLwkg6dXXSfX+8CLDSpq5yrExcg/nEum623f/c="
 
 install:
   - curl --silent --output terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_${TF_OS}.zip
@@ -12,11 +13,28 @@ install:
   - mkdir -p ${HOME}/bin ; export PATH=${PATH}:${HOME}/bin; mv terraform ${HOME}/bin/
   - terraform -v
 
-script:
-  - terraform fmt -check -diff aws-budget/
-  - terraform fmt -check -diff datadog-budget/
-  - terraform init tests/
-  - terraform validate tests/
-deploy:
-  - provider: script
-    script: npx semantic-release
+_shared_job: &SHARED_JOB
+  script:
+    - terraform fmt -check -diff aws-budget/
+    - terraform fmt -check -diff datadog-budget/
+    - terraform init tests/
+    - terraform validate tests/
+
+jobs:
+  include:
+    - name: Validate
+      env:
+        - TF_VERSION=0.12.24
+        - TF_OS=linux_amd64
+        - TF_SHA256=602d2529aafdaa0f605c06adb7c72cfb585d8aa19b3f4d8d189b42589e27bf11
+      <<: *SHARED_JOB
+    - env:
+        - TF_VERSION=0.12.23
+        - TF_OS=linux_amd64
+        - TF_SHA256=78fd53c0fffd657ee0ab5decac604b0dea2e6c0d4199a9f27db53f081d831a45
+      <<: *SHARED_JOB
+    - name: Release
+      if: branch = master and type = push
+      deploy:
+        - provider: script
+          script: npx semantic-release
