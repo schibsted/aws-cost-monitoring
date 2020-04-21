@@ -1,0 +1,22 @@
+language: node
+node_js:
+  - 12
+
+env:
+  - TF_VERSION=0.12.24 TF_OS=linux_amd64 TF_SHA256=invalid
+
+install:
+  - curl --silent --output terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_${TF_OS}.zip
+  - sha256sum terraform.zip  | grep ${TF_SHA256}
+  - unzip terraform.zip ; rm -f terraform.zip; chmod +x terraform
+  - mkdir -p ${HOME}/bin ; export PATH=${PATH}:${HOME}/bin; mv terraform ${HOME}/bin/
+  - terraform -v
+
+script:
+  - terraform fmt -check -diff aws-budget/
+  - terraform fmt -check -diff datadog-budget/
+  - terraform init tests/
+  - terraform validate tests/
+deploy:
+  - provider: script
+    script: npx semantic-release

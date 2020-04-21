@@ -1,5 +1,5 @@
 variable "monthly_budget_name" {
-  type = string
+  type    = string
   default = "Monthly AWS Budget"
 }
 
