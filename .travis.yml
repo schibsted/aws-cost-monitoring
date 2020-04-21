@@ -1,5 +1,10 @@
 language: generic
 
+
+branches:
+  except: # skip release tags
+    - /^v?\d+\.\d+(\.\d+)?(-\S*)?$/
+
 _shared_job: &SHARED_JOB
   install:
     - curl --silent --output terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_${TF_OS}.zip
