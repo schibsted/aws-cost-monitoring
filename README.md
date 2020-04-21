@@ -17,7 +17,7 @@ module "aws_budget" {
 ### Datadog dashboard and monitors
 
 ```ruby
-module "aws_budget" {
+module "datadog_monitors" {
   source                = "github.com/schibsted/aws-cost-monitoring//datadog-budget"
   monthly_budget        = 1000 #USD
   subscriber_email_list = ["my-email@example.org"]
