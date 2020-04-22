@@ -26,6 +26,20 @@ variable "forecast_warning_threshold_percent" {
   default = 100
 }
 
+variable "anomaly_algorithm" {
+  type    = string
+  default = "agile"
+}
+
+variable "anomaly_rollup_period" {
+  type    = number
+  default = 43200
+}
+
+variable "anomaly_algorithm_deviation" {
+  type    = number
+  default = 3
+}
 
 variable "aws_services" {
   type = list(string)
