@@ -30,5 +30,5 @@ module "datadog_monitors" {
 - [`aws_budgets_budget.monthly`](https://www.terraform.io/docs/providers/aws/r/budgets_budget.html): Monthly budget including basic notifications when overspending
 
 ### Datadog dashboard and monitors
-- [datadog_monitor.aws_service_anomaly](https://www.terraform.io/docs/providers/datadog/r/monitor.html): Per AWS service anomaly detection monitors group
-- [datadog_dashboard.aws_cost_dashboard](https://www.terraform.io/docs/providers/datadog/r/dashboard.html): AWS cost dashboard
+- [`datadog_monitor.aws_service_anomaly`](https://www.terraform.io/docs/providers/datadog/r/monitor.html): Per AWS service anomaly detection monitors group
+- [`datadog_dashboard.aws_cost_dashboard`](https://www.terraform.io/docs/providers/datadog/r/dashboard.html): AWS cost dashboard
