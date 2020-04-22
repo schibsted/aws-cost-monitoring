@@ -31,6 +31,11 @@ variable "anomaly_algorithm" {
   default = "agile"
 }
 
+variable "anomaly_alerting_direction" {
+  type    = string
+  default = "above"
+}
+
 variable "anomaly_rollup_period" {
   type    = number
   default = 43200
