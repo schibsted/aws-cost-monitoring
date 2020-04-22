@@ -1,0 +1,4 @@
+terraform fmt -check -diff aws-budget/
+terraform fmt -check -diff datadog-budget/
+terraform init tests/
+terraform validate tests/
