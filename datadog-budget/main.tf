@@ -171,7 +171,7 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
           alert_id = "17757110"
           time     = {}
           title    = "Alert: Abnormal spendings on AWS service {{servicename.name}} on account {{account_id.name}}"
-          viz_type = "toplist"
+          viz_type = "timeseries"
         }
       }
     }
