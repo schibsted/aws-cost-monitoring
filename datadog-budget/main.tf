@@ -1,4 +1,5 @@
 resource "datadog_monitor" "aws_service_anomaly" {
+  count            = var.datadog_enable_monitor ? 1 : 0
   evaluation_delay = 900
   include_tags     = true
   locked           = false

@@ -46,6 +46,11 @@ variable "anomaly_algorithm_deviation" {
   default = 3
 }
 
+variable "datadog_enable_monitor" {
+  type    = bool
+  default = true
+}
+
 variable "aws_services" {
   type = list(string)
   default = [
