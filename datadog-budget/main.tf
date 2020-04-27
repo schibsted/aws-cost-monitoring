@@ -1,5 +1,9 @@
 locals {
-  alert_query_from = var.aws_account_id == "*" ? "*" : "account_id:${var.aws_account_id}"
+  alert_query_from    = var.aws_account_id == "*" ? "*" : "account_id:${var.aws_account_id}"
+  alert_title_account = var.aws_account_id == "*" ? "{{account_id.name}}" : "(${var.aws_account_id}/${terraform.workspace})"
+
+  # If dashboard title has a default value and specific AWS account ID is set, then add suffix to default name
+  datadog_dashboard_title = var.datadog_dashboard_title == "AWS Cost Dashboard" && var.aws_account_id != "*" ? "AWS Cost Dashboard (${var.aws_account_id}/${terraform.workspace})" : var.datadog_dashboard_title
 }
 
 resource "datadog_monitor" "aws_service_anomaly" {
@@ -21,7 +25,7 @@ resource "datadog_monitor" "aws_service_anomaly" {
       Notify: @${join(" @", var.subscriber_email_list)}
     EOT
 
-  name                = "Abnormal spendings on AWS service {{servicename.name}} on account {{account_id.name}}"
+  name                = "Abnormal spendings on AWS service {{servicename.name}} on account ${local.alert_title_account}"
   new_host_delay      = 300
   no_data_timeframe   = 172800
   notify_audit        = false
@@ -45,7 +49,7 @@ resource "datadog_monitor" "aws_service_anomaly" {
 
 resource "datadog_dashboard" "aws_cost_dashboard" {
   count        = var.datadog_enable_monitor ? 1 : 0
-  title        = var.datadog_dashboard_title
+  title        = local.datadog_dashboard_title
   description  = "AWS Cost dashboard with anomalies"
   layout_type  = "ordered"
   is_read_only = true
