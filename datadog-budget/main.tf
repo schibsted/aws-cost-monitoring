@@ -40,7 +40,7 @@ resource "datadog_monitor" "aws_service_anomaly" {
 }
 
 resource "datadog_dashboard" "aws_cost_dashboard" {
-  title        = "AWS Cost Dashboard"
+  title        = var.datadog_dashboard_title
   description  = "AWS Cost dashboard with anomalies"
   layout_type  = "ordered"
   is_read_only = true
