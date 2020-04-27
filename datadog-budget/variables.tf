@@ -56,6 +56,11 @@ variable "datadog_dashboard_title" {
   default = "AWS Cost Dashboard"
 }
 
+variable "datadog_enable_dashboard" {
+  type    = bool
+  default = true
+}
+
 variable "aws_services" {
   type = list(string)
   default = [
