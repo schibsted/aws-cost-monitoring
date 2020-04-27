@@ -61,6 +61,11 @@ variable "datadog_enable_dashboard" {
   default = true
 }
 
+variable "aws_account_id" {
+  type    = string
+  default = "*"
+}
+
 variable "aws_services" {
   type = list(string)
   default = [

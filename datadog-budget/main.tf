@@ -1,3 +1,7 @@
+locals {
+  alert_query_from = var.aws_account_id == "*" ? "*" : "account_id:${var.aws_account_id}"
+}
+
 resource "datadog_monitor" "aws_service_anomaly" {
   count            = var.datadog_enable_monitor ? 1 : 0
   evaluation_delay = 900
@@ -22,7 +26,7 @@ resource "datadog_monitor" "aws_service_anomaly" {
   no_data_timeframe   = 172800
   notify_audit        = false
   notify_no_data      = true
-  query               = "avg(last_2w):anomalies(per_hour(max:aws.billing.estimated_charges{*} by {servicename,account_id}.rollup(max, ${var.anomaly_rollup_period})), '${var.anomaly_algorithm}', ${var.anomaly_algorithm_deviation}, direction='${var.anomaly_alerting_direction}', alert_window='last_1d', interval=7200, count_default_zero='true', seasonality='weekly') >= 1"
+  query               = "avg(last_2w):anomalies(per_hour(max:aws.billing.estimated_charges{${local.alert_query_from}} by {servicename,account_id}.rollup(max, ${var.anomaly_rollup_period})), '${var.anomaly_algorithm}', ${var.anomaly_algorithm_deviation}, direction='${var.anomaly_alerting_direction}', alert_window='last_1d', interval=7200, count_default_zero='true', seasonality='weekly') >= 1"
   renotify_interval   = 0
   require_full_window = false
   tags                = []
@@ -48,7 +52,7 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
 
   template_variable {
     name    = "account_id"
-    default = "*"
+    default = var.aws_account_id
     prefix  = "account_id"
   }
 
