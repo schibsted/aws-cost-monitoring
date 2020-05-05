@@ -36,9 +36,9 @@ variable "anomaly_alerting_direction" {
   default = "above"
 }
 
-variable "anomaly_rollup_period" {
+variable "metric_rollup_period" {
   type    = number
-  default = 43200
+  default = 86400
 }
 
 variable "anomaly_algorithm_deviation" {
@@ -64,6 +64,17 @@ variable "datadog_enable_dashboard" {
 variable "aws_account_id" {
   type    = string
   default = "*"
+}
+
+variable "minimal_alerting_value" {
+  type        = string
+  description = "Minimal absolute value to be alerted on (this is value per rollup time. If rollup is set to 86400 then this value is cost per day.)"
+  default     = "0"
+}
+
+variable "monitor_tags" {
+  type    = list(string)
+  default = []
 }
 
 variable "aws_services" {
