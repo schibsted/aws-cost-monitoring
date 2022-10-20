@@ -20,3 +20,8 @@ variable "forecast_threshold_percent" {
   type    = string
   default = 110
 }
+
+variable "include_discount" {
+  type    = bool
+  default = false
+}
