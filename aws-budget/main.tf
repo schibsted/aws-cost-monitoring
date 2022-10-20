@@ -13,7 +13,7 @@ resource "aws_budgets_budget" "monthly" {
 
   cost_types {
     include_credit             = false
-    include_discount           = false
+    include_discount           = var.include_discount
     include_other_subscription = false
     include_recurring          = false
     include_refund             = false
