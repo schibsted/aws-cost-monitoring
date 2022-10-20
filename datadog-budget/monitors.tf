@@ -24,21 +24,17 @@ resource "datadog_monitor" "aws_service_anomaly" {
   renotify_interval   = 0
   require_full_window = false
   tags                = var.monitor_tags
-  threshold_windows = {
-    "recovery_window" = "last_1h"
-    "trigger_window"  = "last_1d"
+  monitor_threshold_windows {
+    recovery_window = "last_1h"
+    trigger_window  = "last_1d"
   }
-  thresholds = {
-    "critical"          = "1.0"
-    "critical_recovery" = "0.0"
-    "warning"           = "0.5"
+  monitor_thresholds {
+    critical          = 1.0
+    critical_recovery = 0.0
+    warning           = 0.5
   }
   timeout_h = 0
   type      = "query alert"
-
-  lifecycle {
-    ignore_changes = [silenced]
-  }
 }
 
 resource "datadog_monitor" "aws_service_minimal_cost" {
@@ -57,15 +53,11 @@ resource "datadog_monitor" "aws_service_minimal_cost" {
   renotify_interval   = 0
   require_full_window = false
   tags                = var.monitor_tags
-  thresholds = {
-    "critical" = var.minimal_alerting_value
+  monitor_thresholds {
+    critical = var.minimal_alerting_value
   }
   timeout_h = 0
   type      = "query alert"
-
-  lifecycle {
-    ignore_changes = [silenced]
-  }
 }
 
 # Mute all sub monitors

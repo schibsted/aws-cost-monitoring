@@ -12,19 +12,14 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
   }
 
   widget {
-    layout = {}
-
     group_definition {
       layout_type = "ordered"
       title       = "Budget"
 
       widget {
-        layout = {}
-
         query_value_definition {
           autoscale = false
           precision = 2
-          time      = {}
           title     = "Actual spendings"
 
           request {
@@ -53,12 +48,9 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
         }
       }
       widget {
-        layout = {}
-
         query_value_definition {
           autoscale = true
           precision = 2
-          time      = {}
           title     = "Forecasted estimates"
 
           request {
@@ -87,10 +79,7 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
         }
       }
       widget {
-        layout = {}
-
         toplist_definition {
-          time  = {}
           title = "Max of aws.billing.estimated_charges over $account_id by servicename"
 
           request {
@@ -101,17 +90,12 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
     }
   }
   widget {
-    layout = {}
-
     group_definition {
       layout_type = "ordered"
       title       = "Anomalies"
 
       widget {
-        layout = {}
-
         change_definition {
-          time  = {}
           title = "Max of aws.billing.estimated_charges over * by servicename"
 
           request {
@@ -126,11 +110,8 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
         }
       }
       widget {
-        layout = {}
-
         alert_graph_definition {
           alert_id = "17757110"
-          time     = {}
           title    = "Alert: Abnormal spendings on AWS service {{servicename.name}} on account {{account_id.name}}"
           viz_type = "timeseries"
         }
@@ -138,8 +119,6 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
     }
   }
   widget {
-    layout = {}
-
     group_definition {
       layout_type = "ordered"
       title       = "Per AWS Service Chart"
@@ -147,11 +126,8 @@ resource "datadog_dashboard" "aws_cost_dashboard" {
       dynamic "widget" {
         for_each = var.aws_services
         content {
-          layout = {}
-
           timeseries_definition {
             show_legend = false
-            time        = {}
             title       = widget.value
 
             request {
