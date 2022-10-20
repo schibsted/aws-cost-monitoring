@@ -1,0 +1,24 @@
+name: Test Pull Request
+
+on:
+  pull_request:
+    
+
+jobs:
+  test:
+    name: Test PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.3.2
+      - name: Terraform Format
+        run: terraform fmt -check -diff aws-budget/
+      - run: terraform fmt -check -diff datadog-budget/
+      - name: Terraform Test
+        run: terraform init tests/
+      - run: terraform validate tests/
