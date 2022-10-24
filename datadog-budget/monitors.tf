@@ -15,7 +15,7 @@ resource "datadog_monitor" "aws_service_anomaly" {
   message          = "sub monitor. Check datadog_monitor.aws_cost_monitor"
 
   name                = "(sub/anomaly) Abnormal spendings on AWS service {{servicename.name}} on account ${local.alert_title_account}"
-  new_group_delay      = 300
+  new_group_delay     = 300
   notify_audit        = false
   notify_no_data      = false
   query               = "avg(last_2w):anomalies(diff(max:aws.billing.estimated_charges{${local.alert_query_from}} by {${local.query_group_by}}.rollup(max, ${var.metric_rollup_period})), '${var.anomaly_algorithm}', ${var.anomaly_algorithm_deviation}, direction='${var.anomaly_alerting_direction}', alert_window='last_1d', interval=7200, count_default_zero='true', seasonality='weekly') >= 1"
@@ -42,7 +42,7 @@ resource "datadog_monitor" "aws_service_minimal_cost" {
   message          = "sub monitor. Check datadog_monitor.aws_cost_monitor"
 
   name                = "(sub/minimal) Abnormal spendings on AWS service {{servicename.name}} on account ${local.alert_title_account}"
-  new_group_delay      = 300
+  new_group_delay     = 300
   no_data_timeframe   = 172800
   notify_audit        = false
   notify_no_data      = true

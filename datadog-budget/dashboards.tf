@@ -1,8 +1,8 @@
 resource "datadog_dashboard" "aws_cost_dashboard" {
-  count        = var.datadog_enable_monitor ? 1 : 0
-  title        = local.datadog_dashboard_title
-  description  = "AWS Cost dashboard with anomalies"
-  layout_type  = "ordered"
+  count       = var.datadog_enable_monitor ? 1 : 0
+  title       = local.datadog_dashboard_title
+  description = "AWS Cost dashboard with anomalies"
+  layout_type = "ordered"
 
   template_variable {
     name    = "account_id"
